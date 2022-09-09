@@ -1,0 +1,102 @@
+*{
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+}
+.game{
+    width: 60%;
+    margin: 3vh auto 3vh auto;
+}
+
+.dark {
+    color: white;
+    background-color: #242423;
+}
+
+.light {
+    color: black;
+    background-color: rgb(254, 246, 235);
+}
+
+.board{
+    width: 100%;
+    height: 60vw;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    .cell{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+        font-size: 8vw;
+    }
+    .right{
+        border-right: solid 1px grey;
+    }
+    .left{
+        border-left: solid 1px grey;
+    }
+    .top{
+        border-top: solid 1px grey;
+    }
+    .bottom{
+        border-bottom: solid 1px grey;
+    }
+}
+
+.hidden{
+    display: none;
+}
+
+#messages{
+    width: 100%;
+    height: 60vh;
+    font-size: 4.5vw;
+    padding-left: 2em;
+    padding-right: 2em;
+    .message{
+        margin-top: .75em;
+    }
+}
+
+
+#new-message{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    input{
+        padding: .25em;
+        margin-right: .25em;
+    }
+    #username {
+        width: 20%;
+    }
+    #message{
+        width: 60%;
+    }
+    button {
+        padding: .25em;
+    }
+}
+
+// desktops and laptops
+@media only screen and (min-width: 1224px){
+    #messages {
+        font-size: 1.5vw;
+        height: 50vh;
+    }
+    .msg_container{
+        height: 50vh;
+    }
+    .board{
+        height: 20vw;
+        .cell{
+            font-size: 4vw;
+        }
+    }
+    .game{
+        width: 20%;
+    }
+}

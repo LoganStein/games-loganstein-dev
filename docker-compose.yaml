@@ -1,0 +1,12 @@
+services:
+  games-server:
+    # image: games-dev:latest
+    build:
+      context: ./tic-tac-toe
+      dockerfile: Dockerfile
+    environment:
+      - ROCKET_ADDRESS=0.0.0.0
+      - ROCKET_PORT=8000
+    ports:
+      - "8081:8000"
+    command: ["cargo", "run"]

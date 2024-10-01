@@ -27,6 +27,14 @@ struct Play {
     pub cell: u32,
     pub username: String,
     pub reset: bool,
+    pub room: String,
+}
+
+#[derive(Clone, Serialize, Deserialize)]
+#[serde(crate="rocket::serde")]
+struct Player{
+    pub name: String,
+    pub plays: (String, Vec<u32>), // tuple of room and the plays in that room
 }
 
 #[get("/playEvents")]
@@ -70,20 +78,32 @@ async fn events(queue: &State<Sender<Message>>, mut end: Shutdown) -> EventStrea
     }
 }
 
+// listens for message from script.js (from fetch)
 #[post("/message", data = "<form>")]
 fn post(form: Form<Message>, queue: &State<Sender<Message>>) {
+    println!("MSG: {:?}", form);
     let _res = queue.send(form.into_inner());
 }
 
 
+
+
+
+// if i want to implement game control/logic from server side this is where I would do it
+// just parse form and perform logic on it.
+// one issue though is that i dont know how to send a message to the users from here... oh i guess its just queue.send("message") lmao literally the next line
+
+// some how i need to keep a state of the game (multiple game states, one for each room)
+
 #[post("/play", data = "<form>")]
 fn postPlay(form: Form<Play>, queue: &State<Sender<Play>>) {
-    // println!("Play: {:?}", form);
-    // if i want to implement game control/logic from server side this is where I would do it
-    // just parse form and perform logic on it.
-    // one issue though is that i dont know how to send a message to the users from here... oh i guess its just queue.send("message") lmao literally the next line
+    println!("Play: {:?}", form);
 
-    // some how i need to keep a state of the game (multiple game states, one for each room)
+    let cell = form.cell.clone();
+    let username = form.username.clone();
+    let room = form.room.clone();
+
+    
 
     let _res = queue.send(form.into_inner());
 }

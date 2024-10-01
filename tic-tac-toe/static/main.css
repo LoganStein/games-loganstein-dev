@@ -4,14 +4,25 @@
   box-sizing: border-box;
 }
 
+body {
+  height: 93vh;
+  overflow: hidden;
+  display: grid;
+  grid-template-rows: auto auto 1fr;
+}
+
 .game {
   width: 60%;
-  margin: 3vh auto 3vh auto;
+  margin: auto;
+}
+
+.dev {
+  border: 1px solid teal;
 }
 
 .dark {
   color: white;
-  background-color: #242423;
+  background-color: #1f1f21;
 }
 
 .light {
@@ -51,9 +62,61 @@
   display: none;
 }
 
+#sidebar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+#sidebar .players,
+#sidebar .observers {
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  margin-bottom: 1em;
+}
+#sidebar .players .list-heading,
+#sidebar .observers .list-heading {
+  font-size: larger;
+  font-weight: 600;
+  border-bottom: 1px solid grey;
+  margin-bottom: 0.25em;
+  padding-bottom: 0.25em;
+}
+#sidebar .player {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25em;
+}
+#sidebar #room-code:focus {
+  text-decoration: underline;
+  outline: none;
+}
+#sidebar #status.pending::before {
+  content: "status: connected";
+}
+#sidebar #status.pending {
+  background-color: yellow;
+  color: #000;
+}
+#sidebar #status.connected::before {
+  content: "status: connected";
+}
+#sidebar #status.connected {
+  background-color: green;
+  color: #fff;
+}
+#sidebar #status.reconnecting::before {
+  content: "status: reconnecting";
+}
+#sidebar #status.reconnecting {
+  background-color: red;
+  color: #fff;
+}
+
 #messages {
   width: 100%;
-  height: 60vh;
+  max-height: 100%;
   font-size: 4.5vw;
   padding-left: 2em;
   padding-right: 2em;
@@ -66,6 +129,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  position: absolute;
+  bottom: 1em;
+  left: 50%;
+  width: 90vw;
+  transform: translateX(-50%);
 }
 #new-message input {
   padding: 0.25em;
@@ -80,22 +148,87 @@
 #new-message button {
   padding: 0.25em;
 }
+#new-message #new-play {
+  margin-right: 0.25em;
+}
 
-@media only screen and (min-width: 1224px) {
+.msg_container {
+  height: 100%;
+  overflow: scroll;
+}
+
+@media only screen and (min-width: 1024px) {
+  body {
+    display: grid;
+    grid-template-columns: 10vw 1fr;
+    grid-template-rows: auto auto auto;
+    height: 100vh;
+  }
+  #sidebar {
+    box-sizing: border-box;
+    background-color: #242423;
+    grid-column: 1;
+    grid-row: 1/4;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: start;
+  }
+  #sidebar #status {
+    width: 100%;
+    padding: 0.25em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  #sidebar .room-code {
+    margin-top: 0.5em;
+  }
+  #sidebar .players,
+  #sidebar .observers {
+    align-self: baseline;
+    margin-top: 1em;
+  }
   #messages {
     font-size: 1.5vw;
     height: 50vh;
+    overflow: scroll;
+  }
+  #messages::-webkit-scrollbar {
+    display: none;
   }
   .msg_container {
+    grid-column: 2;
+    grid-row: 2;
     height: 50vh;
-  }
-  .board {
-    height: 20vw;
-  }
-  .board .cell {
-    font-size: 4vw;
+    width: 90%;
+    height: 100%;
+    margin: auto;
+    overflow: hidden;
   }
   .game {
-    width: 20%;
+    width: 30%;
+    grid-column: 2;
+    grid-row: 1;
+  }
+  .game .board {
+    height: 26.9vw;
+  }
+  .game .board .cell {
+    font-size: 4vw;
+  }
+  #new-message {
+    position: relative;
+    grid-row: 3;
+    grid-column: 2;
+    transform: none;
+    bottom: 0;
+    left: 0;
+    margin-bottom: 1em;
+    margin-top: 1em;
+  }
+  #new-message input,
+  #new-message button {
+    padding: 0.5em;
   }
 }/*# sourceMappingURL=main.css.map */

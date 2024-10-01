@@ -1,81 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <!-- this line is crucial!! -->
     <script src="/script.js" charset="utf-8" defer></script>
-    <link rel="stylesheet" href="main.css">
+    <link rel="stylesheet" href="main.css" />
     <title>Document</title>
-</head>
-<body class="dark">
-    <div id="sidebar" class="hidden">
-        <div id="status" class="pending"></div>
-
-        <div id="room-list">
-          <template id="room">
-            <button class="room"></button>
-          </template>
-        </div>
-
-        <form id="new-room">
-          <input type="text" name="name" id="name" autocomplete="off"
-              placeholder="new room..." maxlength="29"></input>
-          <button type="submit">+</button>
-        </form>
-      </div>
+  </head>
+  <body class="dark">
     <div class="game" id="game">
-        <div class="board">
-            <div id="cell1" class="cell bottom right">
-                <span id="1"></span>
-            </div>
-            <div id="cell2" class="cell bottom">
-                <span id="2"></span>
-            </div>
-            <div id="cell3" class="cell bottom left">
-                <span id="3"></span>
-            </div>
-            <div id="cell4" class="cell right">
-                <span id="4"></span>
-            </div>
-            <div id="cell5" class="cell">
-                <span id="5"></span>
-            </div>
-            <div id="cell6" class="cell left">
-                <span id="6"></span>
-            </div>
-            <div id="cell7" class="cell top right">
-                <span id="7"></span>
-            </div>
-            <div id="cell8" class="cell top">
-                <span id="8"></span>
-            </div>
-            <div id="cell9" class="cell top left">
-                <span id="9"></span>
-            </div>
+      <div class="board">
+        <div id="cell1" class="cell bottom right">
+          <span id="1"></span>
         </div>
+        <div id="cell2" class="cell bottom">
+          <span id="2"></span>
+        </div>
+        <div id="cell3" class="cell bottom left">
+          <span id="3"></span>
+        </div>
+        <div id="cell4" class="cell right">
+          <span id="4"></span>
+        </div>
+        <div id="cell5" class="cell">
+          <span id="5"></span>
+        </div>
+        <div id="cell6" class="cell left">
+          <span id="6"></span>
+        </div>
+        <div id="cell7" class="cell top right">
+          <span id="7"></span>
+        </div>
+        <div id="cell8" class="cell top">
+          <span id="8"></span>
+        </div>
+        <div id="cell9" class="cell top left">
+          <span id="9"></span>
+        </div>
+      </div>
     </div>
-    <div class="msg_container">
-
-    <div id="messages">
-        <template id="message">
-            <div class="message">
-                <span class="username"></span>
-                <span class="text"></span>
-            </div>
+    <div id="sidebar" class="">
+      <div id="status" class="pending"></div>
+      <div class="hidden" id="room-list">
+        <template id="room">
+          <button class="room"></button>
         </template>
-    </div>
-    <form id="new-message">
-        <input type="text" name="username" id="username" placeholder="guest" autocomplete="off">
-        <input type="text" name="message" id="message" autocomplete="off" placeholder="Send a Message...">
-        <button type="submit">Send</button>
-    </form>
-    <form id="new-play">
-        <button type="submit">Reset</button>
-    </form>
-</div>
+      </div>
+      <form class="hidden" id="new-room">
+        <input
+          type="text"
+          name="name"
+          id="name"
+          autocomplete="off"
+          placeholder="new room..."
+          maxlength="29"
+        />
+        <button type="submit">+</button>
+      </form>
 
-    
-</body>
+      <div class="room-code">
+        <span>Code: </span
+        ><span id="room-code" tabindex="0" contenteditable></span>
+      </div>
+
+      <div id="players" class="players">
+        <span class="list-heading">Players:</span>
+        <template id="player">
+          <div class="player">
+            <span id="player-name"></span>
+            <span id="player-score"></span>
+          </div>
+        </template>
+      </div>
+
+      <div class="observers" id="observers">
+        <span class="list-heading">Watching:</span>
+        <template id="observer">
+          <div class="observer">
+            <span id="observer-name"></span>
+          </div>
+        </template>
+      </div>
+    </div>
+    <div id="msg_container" class="msg_container">
+      <div id="messages" class="">
+        <template id="message">
+          <div class="message">
+            <span class="username"></span>
+            <span class="text"></span>
+          </div>
+        </template>
+      </div>
+    </div>
+    <!-- button outside form fixes functionality but moves button to side panel -->
+    <button id="new-play">Reset</button>
+    <form id="new-message">
+      <input
+        type="text"
+        name="username"
+        id="username"
+        placeholder="guest"
+        autocomplete="off"
+      />
+      <input
+        type="text"
+        name="message"
+        id="message"
+        autocomplete="off"
+        placeholder="Send a Message..."
+      />
+      <button type="submit">Send</button>
+    </form>
+    <script>
+      // for (let index = 0; index < 10; index++) {
+      //   var node = document.getElementById("message").content.cloneNode(true);
+      //   node.querySelector(".message .username").textContent = "username" + ":";
+      //   node.querySelector(".message .text").textContent = "message";
+      //   document.getElementById("messages").appendChild(node);
+      // }
+      // function sendingMessage(msg) {
+      //   var node = document.getElementById("message").content.cloneNode(true);
+      //   node.querySelector(".message .username").textContent = "username" + ":";
+      //   node.querySelector(".message .text").textContent = msg;
+      //   document.getElementById("messages").appendChild(node);
+      //   document.getElementById("messages").scrollTop =
+      //     document.getElementById("messages").scrollHeight;
+      // }
+    </script>
+  </body>
 </html>

@@ -1,6 +1,6 @@
-# Multilayer Tic Tac Toe with Chat
+# Multiplayer Tic Tac Toe with Chat
 
-This is a Rust project that implements a web-based multilayer Tic Tac Toe game with chat functionality, utilizing the Rocket web framework. The project allows users to play Tic Tac Toe games in multiple rooms simultaneously, with support for real-time communication through a chat feature.
+This is a Rust project that implements a web-based multiplayer Tic Tac Toe game with chat functionality, utilizing the Rocket web framework. The project allows users to play Tic Tac Toe games in multiple rooms simultaneously, with support for real-time communication through a chat feature.
 
 ## Features
 
